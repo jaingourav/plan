@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desserts</title>
+    <style>
+  .container {
+    display: flex;
+    gap:10px;
+    padding: 20px;
+    flex-wrap: wrap;
+   
+    
+}
+       body{
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    padding:40px;
+    display: flex;
+    justify-content: left;
+    align-items: flex-start;
+    background-color: #f9f9f9;
+    flex-direction: column;
+
+       }
+            #grid{
+                display: grid;
+                width: 80%;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 20px;
+}
+@media (max-width: 1024px) {
+    #grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 columns on medium screens */
+    }
+}
+@media (max-width: 600px) {
+    #grid {
+        grid-template-columns: 1fr; /* 1 column on small screens */
+    }
+}
+@media (max-width: 600px) {
+    h2 {
+        font-size: 30px; /* Smaller title on small screens */
+    }
+
+    .menu-item p {
+        font-size: 14px; /* Smaller item text */
+    }
+
+    .confirm-order,
+    #newOrderBtn {
+        width: 100%; /* Full-width buttons on small screens */
+    }
+}
+.menu-item img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.menu-item p {
+    font-size: 16px;
+    color: rgb(180, 121, 11);
+}
+
+.menu{width:100%;
+}
+
+.menu-item button {
+    padding: 10px 20px;
+    background-color: #ff6347;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+#itemname1{
+    font-size: 14px;
+    color: #666;
+
+}
+.menu-item{
+    line-height: 4%;
+}
+.menu-item {
+  position: relative; /* Make this container relative for absolute positioning */
+  display: inline-block; /* Allow the container to only take as much width as necessary */
+}
+
+.itemimage {
+  display: block; /* Ensures there's no extra space below the image */
+  width: 100%; /* Optional: Set width as needed */
+}
+
+#btn {
+  position: absolute; /* Position the button absolutely */
+  bottom: 70px; /* Adjust the vertical position as needed */
+  left: 50%; /* Center horizontally */
+  transform: translateX(-50%); /* Shift the button back by half its width */
+  padding: 10px 20px;
+  background-color: white;
+  color:black;
+  border:black;
+  border-radius: 30px;
+  cursor: pointer;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+  display: flex;
+}
+
+
+#btn:hover {
+  background-color: #e04b1e;
+}
+#cart{
+            color:black;
+            border-radius: 8px ; 
+            background-color:white;
+            padding: 20px;
+            width: 30%;
+            box-sizing: border-box;
+}
+.increase:hover{
+    background-color: white;
+    color: black;
+    border-radius: 100%;
+    width:60px;
+    color: rgb(227, 89, 4) ;
+    margin-right: 5px;
+}
+.decrease:hover{
+    background-color: white;
+    color: black;
+    border-radius: 100%;
+    width:80px;
+    color: rgb(227, 89, 4) ;
+    text-size-adjust: 20px;
+}
+.cartitem{
+    display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-sizing: border-box;
+   
+}
+.cart-buttons {
+            display: flex;
+            align-items: center;
+            position: absolute; /* Position the button absolutely */
+            bottom: 70px; /* Adjust the vertical position as needed */
+            left: 50%; /* Center horizontally */
+            transform: translateX(-50%); /* Shift the button back by half its width */
+            padding: 10px 20px;
+            background-color: rgb(227, 89, 4);
+            color:black;
+            border:black;
+            border-radius: 30px;
+            cursor: pointer;
+            justify-content: center;
+            text-align: center;
+            width: 85px;
+            height: 18px;
+            align-items: center;
+            display: flex;
+        }
+        .cart-buttons button {
+            margin: 5px;
+            padding: 5px;
+            cursor: pointer;
+            background-color: rgb(227, 89, 4);
+            border-radius: 50%;
+            border: white;
+            width: 60px;
+            border: 2px solid white;
+            font-size: 18px;
+            word-spacing: 10px;
+            
+
+        }
+        .remove-item{ margin: 3px;
+            padding: 3px;
+            cursor: pointer;
+            background-color:white;
+            border-radius: 50%;
+            width: 20px;
+            color: #666;
+            border: 1px solid #666;
+            font-size: 10px;
+            word-spacing: 10px;}
+        .remove-item:hover{
+            background-color: white;
+            color: black;
+            border-radius: 50%;
+            width:20px;
+            border: 1px solid black;
+        }
+        hr{
+               border-top: 1px solid #e0e0e0;
+  
+        }
+        .quantity{padding: 25px;}
+        #cartitem{
+            text-align: left;
+        }
+        .confirm-order{
+            background-color: rgb(227, 89, 4);
+            color: white;
+            width: 300px;
+            height: 50px;
+            border-radius: 40px;
+            border: none;
+            font-size: medium;
+
+        }
+        .confirm-order:hover{background-color: #971c06;
+        }
+        #newOrderBtn{
+            background-color: rgb(227, 89, 4);
+            color: white;
+            width: 300px;
+            height: 50px;
+            border-radius: 40px;
+            border: none;
+            font-size: medium; 
+        }
+
+        .modal {
+    display: none;
+    position: absolute;
+    z-index: 1000; /* Ensure it stays on top */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: #fff;
+  margin: 15% auto;
+  padding: 20px;
+  border-radius: 10px;
+  overflow: visible;
+  width: 80%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+
+#modal-cart-items {
+    margin-bottom: 20px;
+    text-align: left;
+}       
+    </style>
+</head>
+<body style="background-color:rgb(244, 241, 236)">
+ <div id="container-div">
+    <section class="menu">
+        <h2 style="font-size: 45px;">Desserts</h2>
+        <div id="grid">
+            <div class="menu-item">
+                <img  id="itemimage" alt="itemname" src="C:\Users\goura\Downloads\product-list-with-cart-main\assets\images\image-waffle-desktop.jpg" alt="waffle">
+                <button id="btn"  data-price="6.50" ><svg xmlns="http://www.w3.org/2000/svg" width="21" height="20" fill="none" viewBox="0 0 21 20"><g fill="#C73B0F" clip-path="url(#a)"><path d="M6.583 18.75a1.25 1.25 0 1 0 0-2.5 1.25 1.25 0 0 0 0 2.5ZM15.334 18.75a1.25 1.25 0 1 0 0-2.5 1.25 1.25 0 0 0 0 2.5ZM3.446 1.752a.625.625 0 0 0-.613-.502h-2.5V2.5h1.988l2.4 11.998a.625.625 0 0 0 .612.502h11.25v-1.25H5.847l-.5-2.5h11.238a.625.625 0 0 0 .61-.49l1.417-6.385h-1.28L16.083 10H5.096l-1.65-8.248Z"/><path d="M11.584 3.75v-2.5h-1.25v2.5h-2.5V5h2.5v2.5h1.25V5h2.5V3.75h-2.5Z"/></g><defs><clipPath id="a"><path fill="#fff" d="M.333 0h20v20h-20z"/></clipPath></defs></svg>Add to cart</button>
+                <div class="cart-buttons" style="display:none;">
+                    <button class="decrease"  data-price="6.50"  style="word-spacing: 20px;">-</button>
+                    <span class="quantity" >1</span>
+                    <button class="increase"  data-price="6.50"  style="word-spacing: 20px;">+</button>
+                </div>
+                <p id="itemname1">Waffle</p>
+                <h5 id="itemname">Waffle with berries</h5>
+                <p>$6.50</p>
+
+            </div>
+            <div class="menu-item">
+                <img id="itemimage" alt="itemname" src="C:\Users\goura\Downloads\product-list-with-cart-main\assets\images\image-baklava-desktop.jpg">
+                <button id="btn"  data-price="4" ><svg xmlns="http://www.w3.org/2000/svg" width="21" height="20" fill="none" viewBox="0 0 21 20"><g fill="#C73B0F" clip-path="url(#a)"><path d="M6.583 18.75a1.25 1.25 0 1 0 0-2.5 1.25 1.25 0 0 0 0 2.5ZM15.334 18.75a1.25 1.25 0 1 0 0-2.5 1.25 1.25 0 0 0 0 2.5ZM3.446 1.752a.625.625 0 0 0-.613-.502h-2.5V2.5h1.988l2.4 11.998a.625.625 0 0 0 .612.502h11.25v-1.25H5.847l-.5-2.5h11.238a.625.625 0 0 0 .61-.49l1.417-6.385h-1.28L16.083 10H5.096l-1.65-8.248Z"/><path d="M11.584 3.75v-2.5h-1.25v2.5h-2.5V5h2.5v2.5h1.25V5h2.5V3.75h-2.5Z"/></g><defs><clipPath id="a"><path fill="#fff" d="M.333 0h20v20h-20z"/></clipPath></defs></svg>Add to cart</button>
+                <div class="cart-buttons" style="display:none;">
+                    <button class="decrease"  data-price="4"  style="word-spacing: 20px;">-</button>
+                    <span class="quantity" >1</span>
+                    <button class="increase"  data-price="4"  style="word-spacing: 20px;">+</button>
+                </div>
+                <p id="itemname1">Baklava</p>
+                <h5 id="itemname">Pistachio Baklava</h5>
+                <p>$4</p>
+
+            </div>
+            <div class="menu-item">
+                <img id="itemimage" alt="itemname" src="C:\Users\goura\Downloads\product-list-with-cart-main\assets\images\image-brownie-desktop.jpg">
+                <button id="btn"  data-price="5.50" ><svg xmlns="http://www.w3.org/2000/svg" width="21" height="20" fill="none" viewBox="0 0 21 20"><g fill="#C73B0F" clip-path="url(#a)"><path d="M6.583 18.75a1.25 1.25 0 1 0 0-2.5 1.25 1.25 0 0 0 0 2.5ZM15.334 18.75a1.25 1.25 0 1 0 0-2.5 1.25 1.25 0 0 0 0 2.5ZM3.446 1.752a.625.625 0 0 0-.613-.502h-2.5V2.5h1.988l2.4 11.998a.625.625 0 0 0 .612.502h11.25v-1.25H5.847l-.5-2.5h11.238a.625.625 0 0 0 .61-.49l1.417-6.385h-1.28L16.083 10H5.096l-1.65-8.248Z"/><path d="M11.584 3.75v-2.5h-1.25v2.5h-2.5V5h2.5v2.5h1.25V5h2.5V3.75h-2.5Z"/></g><defs><clipPath id="a"><path fill="#fff" d="M.333 0h20v20h-20z"/></clipPath></defs></svg>Add to cart</button>
+                <div class="cart-buttons" style="display:none;">
+                    <button class="decrease"  data-price="5.50"  style="word-spacing: 20px;">-</button>
+                    <span class="quantity" >1</span>
+                    <button class="increase"  data-price="5.50"  style="word-spacing: 20px;">+</button>
+                </div>
+                <p id="itemname1">Brownie</p>
+                <h5 id="itemname"> Salted Caramel Brownie</h5>
+                <p>$5.50</p>
+
+            </div>
+            <div class="menu-item">
+                <img id="itemimage" alt="itemname"  src="C:\Users\goura\Downloads\product-list-with-cart-main\assets\images\image-cake-desktop.jpg">
+                <button id="btn"  data-price="4.50" ><svg xmlns="http://www.w3.org/2000/svg" width="21" height="20" fill="none" viewBox="0 0 21 20"><g fill="#C73B0F" clip-path="url(#a)"><path d="M6.583 18.75a1.25 1.25 0 1 0 0-2.5 1.25 1.25 0 0 0 0 2.5ZM15.334 18.75a1.25 1.25 0 1 0 0-2.5 1.25 1.25 0 0 0 0 2.5ZM3.446 1.752a.625.625 0 0 0-.613-.502h-2.5V2.5h1.988l2.4 11.998a.625.625 0 0 0 .612.502h11.25v-1.25H5.847l-.5-2.5h11.238a.625.625 0 0 0 .61-.49l1.417-6.385h-1.28L16.083 10H5.096l-1.65-8.248Z"/><path d="M11.584 3.75v-2.5h-1.25v2.5h-2.5V5h2.5v2.5h1.25V5h2.5V3.75h-2.5Z"/></g><defs><clipPath id="a"><path fill="#fff" d="M.333 0h20v20h-20z"/></clipPath></defs></svg>Add to cart</button>
+                
+                <div class="cart-buttons" style="display:none;">
+                    <button class="decrease"  data-price="4.50"  style="word-spacing: 20px;">-</button>
+                    <span class="quantity" >1</span>
+                    <button class="increase"  data-price="4.50"  style="word-spacing: 20px;">+</button>
+                </div><p id="itemname1">Cake</p>
+                <h5 id="itemname">Red Velvet Cake</h5>
+                <p>$4.50</p>
+
+            </div>
+            <div class="menu-item">
+                <img id="itemimage" alt="itemname" src="C:\Users\goura\Downloads\product-list-with-cart-main\assets\images\image-creme-brulee-desktop.jpg">
+                <button id="btn"  data-price="7" ><svg xmlns="http://www.w3.org/2000/svg" width="21" height="20" fill="none" viewBox="0 0 21 20"><g fill="#C73B0F" clip-path="url(#a)"><path d="M6.583 18.75a1.25 1.25 0 1 0 0-2.5 1.25 1.25 0 0 0 0 2.5ZM15.334 18.75a1.25 1.25 0 1 0 0-2.5 1.25 1.25 0 0 0 0 2.5ZM3.446 1.752a.625.625 0 0 0-.613-.502h-2.5V2.5h1.988l2.4 11.998a.625.625 0 0 0 .612.502h11.25v-1.25H5.847l-.5-2.5h11.238a.625.625 0 0 0 .61-.49l1.417-6.385h-1.28L16.083 10H5.096l-1.65-8.248Z"/><path d="M11.584 3.75v-2.5h-1.25v2.5h-2.5V5h2.5v2.5h1.25V5h2.5V3.75h-2.5Z"/></g><defs><clipPath id="a"><path fill="#fff" d="M.333 0h20v20h-20z"/></clipPath></defs></svg>Add to cart</button>
+                <div class="cart-buttons" style="display:none;">
+                    <button class="decrease"  data-price="7"  style="word-spacing: 20px;">-</button>
+                    <span class="quantity" >1</span>
+                    <button class="increase"  data-price="7"  style="word-spacing: 20px;">+</button>
+                </div>
+                <p id="itemname1">Creme Brulee</p>
+                <h6 id="itemname"><strong>Vanilla Beans Creme Brulee</strong></h6>
+                <p>$7</p>
+
+            </div>
+            <div class="menu-item">
+                <img id="itemimage" alt="itemname" src="C:\Users\goura\Downloads\product-list-with-cart-main\assets\images\image-macaron-desktop.jpg">
+                <button id="btn"  data-price="8" ><svg xmlns="http://www.w3.org/2000/svg" width="21" height="20" fill="none" viewBox="0 0 21 20"><g fill="#C73B0F" clip-path="url(#a)"><path d="M6.583 18.75a1.25 1.25 0 1 0 0-2.5 1.25 1.25 0 0 0 0 2.5ZM15.334 18.75a1.25 1.25 0 1 0 0-2.5 1.25 1.25 0 0 0 0 2.5ZM3.446 1.752a.625.625 0 0 0-.613-.502h-2.5V2.5h1.988l2.4 11.998a.625.625 0 0 0 .612.502h11.25v-1.25H5.847l-.5-2.5h11.238a.625.625 0 0 0 .61-.49l1.417-6.385h-1.28L16.083 10H5.096l-1.65-8.248Z"/><path d="M11.584 3.75v-2.5h-1.25v2.5h-2.5V5h2.5v2.5h1.25V5h2.5V3.75h-2.5Z"/></g><defs><clipPath id="a"><path fill="#fff" d="M.333 0h20v20h-20z"/></clipPath></defs></svg>Add to cart</button>
+                <div class="cart-buttons" style="display:none;">
+                    <button class="decrease" data-price="8" style="word-spacing: 20px;">-</button>
+                    <span class="quantity" >1</span>
+                    <button class="increase" data-price="8" style="word-spacing: 20px;">+</button>
+                </div>
+                <p id="itemname1">Macaron</p>
+                <h5 id="itemname">Macaron Mix Of 5</h5>
+                <p>$8</p>
+
+            </div>
+            <div class="menu-item">
+                <img id="itemimage" alt="itemname" src="C:\Users\goura\Downloads\product-list-with-cart-main\assets\images\image-meringue-desktop.jpg">
+                <button id="btn" data-price="5"><svg xmlns="http://www.w3.org/2000/svg" width="21" height="20" fill="none" viewBox="0 0 21 20"><g fill="#C73B0F" clip-path="url(#a)"><path d="M6.583 18.75a1.25 1.25 0 1 0 0-2.5 1.25 1.25 0 0 0 0 2.5ZM15.334 18.75a1.25 1.25 0 1 0 0-2.5 1.25 1.25 0 0 0 0 2.5ZM3.446 1.752a.625.625 0 0 0-.613-.502h-2.5V2.5h1.988l2.4 11.998a.625.625 0 0 0 .612.502h11.25v-1.25H5.847l-.5-2.5h11.238a.625.625 0 0 0 .61-.49l1.417-6.385h-1.28L16.083 10H5.096l-1.65-8.248Z"/><path d="M11.584 3.75v-2.5h-1.25v2.5h-2.5V5h2.5v2.5h1.25V5h2.5V3.75h-2.5Z"/></g><defs><clipPath id="a"><path fill="#fff" d="M.333 0h20v20h-20z"/></clipPath></defs></svg>Add to cart</button>
+                <div class="cart-buttons" style="display:none;">
+                    <button class="decrease" data-price="5" style="word-spacing: 20px;">-</button>
+                    <span class="quantity" >1</span>
+                    <button class="increase" data-price="5" style="word-spacing: 20px;">+</button>
+                </div>
+                <p id="itemname1">Pie</p>
+                <h5 id="itemname">Lemon Meringue Pie</h5>
+                <p>$5</p>
+
+            </div>
+            <div class="menu-item">
+            <img id="itemimage" alt="itemname" src="C:\Users\goura\Downloads\product-list-with-cart-main\assets\images\image-panna-cotta-desktop.jpg">
+            <button id="btn"  data-price="6.50"  ><svg xmlns="http://www.w3.org/2000/svg" width="21" height="20" fill="none" viewBox="0 0 21 20"><g fill="#C73B0F" clip-path="url(#a)"><path d="M6.583 18.75a1.25 1.25 0 1 0 0-2.5 1.25 1.25 0 0 0 0 2.5ZM15.334 18.75a1.25 1.25 0 1 0 0-2.5 1.25 1.25 0 0 0 0 2.5ZM3.446 1.752a.625.625 0 0 0-.613-.502h-2.5V2.5h1.988l2.4 11.998a.625.625 0 0 0 .612.502h11.25v-1.25H5.847l-.5-2.5h11.238a.625.625 0 0 0 .61-.49l1.417-6.385h-1.28L16.083 10H5.096l-1.65-8.248Z"/><path d="M11.584 3.75v-2.5h-1.25v2.5h-2.5V5h2.5v2.5h1.25V5h2.5V3.75h-2.5Z"/></g><defs><clipPath id="a"><path fill="#fff" d="M.333 0h20v20h-20z"/></clipPath></defs></svg>Add to cart</button>
+            <div class="cart-buttons" style="display:none;">
+                <button class="decrease"  data-price="6.50"  style="word-spacing: 20px;">-</button>
+                <span class="quantity" >1</span>
+                <button class="increase"  data-price="6.50"  style="word-spacing: 20px;">+</button>
+            </div>
+            <p id="itemname1">Panna Cotta</p>
+            <h5 id="itemname">Vanilla Panna Cotta</h5>
+                <p>$6.50</p>
+
+            </div>
+
+            <div class="menu-item">
+                <img id="itemimage" alt="itemname" src="C:\Users\goura\Downloads\product-list-with-cart-main\assets\images\image-tiramisu-desktop.jpg">
+                <button id="btn"  data-price="5.50" ><svg xmlns="http://www.w3.org/2000/svg" width="21" height="20" fill="none" viewBox="0 0 21 20"><g fill="#C73B0F" clip-path="url(#a)"><path d="M6.583 18.75a1.25 1.25 0 1 0 0-2.5 1.25 1.25 0 0 0 0 2.5ZM15.334 18.75a1.25 1.25 0 1 0 0-2.5 1.25 1.25 0 0 0 0 2.5ZM3.446 1.752a.625.625 0 0 0-.613-.502h-2.5V2.5h1.988l2.4 11.998a.625.625 0 0 0 .612.502h11.25v-1.25H5.847l-.5-2.5h11.238a.625.625 0 0 0 .61-.49l1.417-6.385h-1.28L16.083 10H5.096l-1.65-8.248Z"/><path d="M11.584 3.75v-2.5h-1.25v2.5h-2.5V5h2.5v2.5h1.25V5h2.5V3.75h-2.5Z"/></g><defs><clipPath id="a"><path fill="#fff" d="M.333 0h20v20h-20z"/></clipPath></defs></svg>Add to cart</button>
+                <div class="cart-buttons" style="display:none;">
+                    <button class="decrease" data-price="5.50" style="word-spacing: 20px;">-</button>
+                    <span class="quantity" >1</span>
+                    <button class="increase" data-price="5.50" style="word-spacing: 20px;">+</button>
+                </div>
+                <p id="itemname1" name="Classic Tiramisu">Tiramisu</p>
+                <h5 id="itemname"> Classic Tiramisu</h5>
+                <p>$5.50</p>
+
+            </div>  
+        </div>
+            
+    </section>
+ </div>
+    <div id="cart">
+        <b><p style="color: #f64424; font-size: 25px;">Your Cart(0)</p></b>
+        <div class="cartitem">
+            <p >Your added item will appear here</p>
+        </div>
+
+    </div>
+    <div id="orderModal" class="modal" >
+        <div class="modal-content">
+            <span class="close">&times;</span>
+           <br>
+                
+            <br><h1 style="font-size: 30px; font-weight: bold; text-align: left;">Order Confirmed</h1>
+            <p style="color: #666; text-align: left; ">We hope you enjoy your food!</p>
+            <div id="modal-cart-items" style="background-color: #f4ede8; padding: 20px;"></div>
+            <button id="newOrderBtn" >Start New Order</button>
+        </div>
+    </div>
+
+<script>
+
+    const cart = {};
+
+    // Function to add item to the cart
+    function addToCart(button, itemName, itemPrice, imageSrc) {
+    const menuItem = button.closest('.menu-item');
+    const quantityDisplay = menuItem.querySelector('.cart-buttons');
+
+    button.style.display = 'none';
+    quantityDisplay.style.display = 'flex';
+
+    if (!cart[itemName]) {
+        cart[itemName] = { price: itemPrice, quantity: 1, imageSrc: imageSrc };
+    } else {
+        cart[itemName].quantity++;
+    }
+
+    cartQuantity++;
+    grandTotal += itemPrice;
+
+    updateCartDisplay();
+}
+
+
+    // Function to increase item quantity
+    function increaseQuantity(button, itemName) {
+        cart[itemName].quantity++;
+        cartQuantity++;
+        grandTotal += cart[itemName].price;
+
+        button.closest('.menu-item').querySelector('.quantity').textContent = cart[itemName].quantity;
+
+        updateCartDisplay();
+    }
+
+    // Function to decrease item quantity
+    function decreaseQuantity(button, itemName) {
+        if (cart[itemName].quantity > 1) {
+            cart[itemName].quantity--;
+            cartQuantity--;
+            grandTotal -= cart[itemName].price;
+            button.closest('.menu-item').querySelector('.quantity').textContent = cart[itemName].quantity;
+        } else {
+            removeFromCart(itemName);
+        }
+
+        updateCartDisplay();
+    }
+
+    // Function to remove item from cart
+    function removeFromCart(itemName) {
+        if (cart[itemName]) {
+            const itemPrice = cart[itemName].price;
+            const itemQuantity = cart[itemName].quantity;
+
+            // Update global cart quantity and grand total
+            cartQuantity -= itemQuantity;
+            grandTotal -= itemPrice * itemQuantity;
+
+            // Remove item from cart object
+            delete cart[itemName];
+
+            // Update the UI for this specific menu item
+            const menuItem = document.querySelector(`.menu-item[data-item="${itemName}"]`);
+            if (menuItem) {
+                menuItem.querySelector('.cart-buttons').style.display = 'none';
+                menuItem.querySelector('#btn').style.display = 'inline-block';
+            }
+        }
+
+        updateCartDisplay();
+    }
+
+    // Function to update the cart display in the UI
+    function updateCartDisplay() {
+        const cartContainer = document.getElementById('cart');
+        cartContainer.innerHTML = '<p style="color: #f64424; font-size: 25px;"><b>Your Cart (<span id="cart-quantity">0</span>)</b></p>';
+
+        if (Object.keys(cart).length === 0) {
+            cartContainer.innerHTML += `<div class="cartitem"><p>Your added items will appear here</p></div>`;
+            return;
+        }
+        Object.keys(cart).forEach(itemName => {
+    const item = cart[itemName];
+    const cartItem = document.createElement('div');
+    cartItem.className = 'cartitem';
+    
+    cartItem.innerHTML = `
+    <div style="display: flex; justify-content: space-between; align-items: center; width: 100%; margin-bottom: 10px;">
+        <div style="text-align: left; flex-grow: 1;">
+            <p><b>${itemName}</b><br>
+                <span style="color: rgb(180, 121, 11);"><b>${item.quantity}x         &nbsp</b></span> 
+                @$${item.price.toFixed(2)} &nbsp <b>$${(item.quantity * item.price).toFixed(2)}</b>
+            </p>
+        </div>
+        <button class="remove-item" >X</button>
+    </div>`;
+
+    // Add click event to the remove button
+    cartItem.querySelector('.remove-item').addEventListener('click', function () {
+        removeFromCart(itemName);
+    });
+
+    // Append the item to the cart container
+            
+            cartContainer.appendChild(cartItem);
+            const separator = document.createElement('hr');
+            cartContainer.appendChild(separator);
+        });
+
+        const grandTotalElement = document.createElement('div');
+        grandTotalElement.className = 'grand-total';
+        grandTotalElement.innerHTML = `<p style="color: #666;">Order Total  <span  style=" color:black; font-size:20px; float: right; font-weight:bold;">$<span id="grand-total">  ${grandTotal.toFixed(2)}</span></span></p>`;
+        cartContainer.appendChild(grandTotalElement);
+
+        const statementElement = document.createElement('div');
+        statementElement.className = 'Statement';
+        statementElement.innerHTML = '<p style="background-color: #f9f9f9;padding:20px;text-align:center;border-radius:5px"><svg xmlns="http://www.w3.org/2000/svg" width="21" height="20" fill="none" viewBox="0 0 21 20"><path fill="#1EA575" d="M8 18.75H6.125V17.5H8V9.729L5.803 8.41l.644-1.072 2.196 1.318a1.256 1.256 0 0 1 .607 1.072V17.5A1.25 1.25 0 0 1 8 18.75Z"/><path fill="#1EA575" d="M14.25 18.75h-1.875a1.25 1.25 0 0 1-1.25-1.25v-6.875h3.75a2.498 2.498 0 0 0 2.488-2.747 2.594 2.594 0 0 0-2.622-2.253h-.99l-.11-.487C13.283 3.56 11.769 2.5 9.875 2.5a3.762 3.762 0 0 0-3.4 2.179l-.194.417-.54-.072A1.876 1.876 0 0 0 5.5 5a2.5 2.5 0 1 0 0 5v1.25a3.75 3.75 0 0 1 0-7.5h.05a5.019 5.019 0 0 1 4.325-2.5c2.3 0 4.182 1.236 4.845 3.125h.02a3.852 3.852 0 0 1 3.868 3.384 3.75 3.75 0 0 1-3.733 4.116h-2.5V17.5h1.875v1.25Z"/></svg>&nbsp This is a <b>carbon-neutral</b> delivery</p>';
+        cartContainer.appendChild(statementElement);
+
+        const confirmOrderButton = document.createElement('button');
+        confirmOrderButton.className = 'confirm-order';
+        confirmOrderButton.textContent = 'Confirm Order';
+        cartContainer.appendChild(confirmOrderButton);
+        confirmOrderButton.addEventListener('click', function() {
+        openOrderModal();
+    });
+        
+        
+        updateCartQuantity();
+        updateGrandTotal();
+    }
+
+    // Function to update the cart quantity display
+    function updateCartQuantity() {
+        document.getElementById('cart-quantity').textContent = cartQuantity;
+    }
+
+    // Function to update the grand total
+    function updateGrandTotal() {
+        document.getElementById('grand-total').textContent = grandTotal.toFixed(2);
+    }
+
+    let cartQuantity = 0;
+    let grandTotal = 0;
+
+    document.querySelectorAll('.menu-item').forEach(menuItem => {
+    const itemName = menuItem.querySelector('#itemname').textContent;
+    const itemPrice = parseFloat(menuItem.querySelector('p:last-of-type').textContent.slice(1));
+    const itemImageSrc = menuItem.querySelector('img').src; // Get the image source
+
+    menuItem.setAttribute('data-item', itemName);
+
+    menuItem.querySelector('#btn').addEventListener('click', function () {
+        addToCart(this, itemName, itemPrice, itemImageSrc);
+    });
+
+    menuItem.querySelector('.increase').addEventListener('click', function () {
+        increaseQuantity(this, itemName);
+    });
+
+    menuItem.querySelector('.decrease').addEventListener('click', function () {
+        decreaseQuantity(this, itemName);
+    });
+});
+
+    //pop up window for confirm order
+    function openOrderModal() {
+    const modal = document.getElementById('orderModal');
+    const modalCartItems = document.getElementById('modal-cart-items');
+
+    modalCartItems.innerHTML = ''; // Clear previous items
+
+    // Add the items to the modal
+    Object.keys(cart).forEach(itemName => {
+    const item = cart[itemName];
+     // Add the total price for each item to totalAmount
+
+    // Create a container for each item with flex layout for side-by-side display
+    const modalItemContainer = document.createElement('div');
+    modalItemContainer.className = 'modal-item-container';
+    modalItemContainer.style.display = 'flex'; // Use flexbox for side-by-side alignment
+    modalItemContainer.style.alignItems = 'center'; // Align items vertically in the center
+    modalItemContainer.style.marginBottom = '10px'; // Add some space between items
+
+    // Create and append the image element
+    const itemImage = document.createElement('img');
+    itemImage.src = item.imageSrc;
+    itemImage.alt = itemName;
+    itemImage.style.width = '80px'; // Adjust the size of the image as necessary
+    itemImage.style.height = '80px'; 
+    itemImage.style.marginRight = '10px'; // Add some space between the image and text
+
+    // Create and append the item details (name, quantity, price)
+    const modalItemDetails = document.createElement('div'); // Use a div for text content
+    modalItemDetails.style.display = 'flex';
+    modalItemDetails.style.justifyContent = 'space-between';
+    modalItemDetails.style.width = '100%'; // Ensure it takes full width
+
+    // Create the inner structure with item name, quantity, and price
+    modalItemDetails.innerHTML = `
+        <div>
+            <b>${itemName}</b><br>
+            <span style="color: rgb(180, 121, 11);"><b>${item.quantity}x</b></span> &nbsp; 
+            <span>@$${item.price.toFixed(2)}</span> &nbsp;
+        </div>
+        <div style="color:black; font-weight:bold;">
+            <b>$${(item.quantity * item.price).toFixed(2)}</b>
+        </div>
+    `;
+
+    // Append the image and details to the container
+    modalItemContainer.appendChild(itemImage);
+    modalItemContainer.appendChild(modalItemDetails);
+
+    // Append the container to the modal cart items
+    modalCartItems.appendChild(modalItemContainer);
+
+    // Add a horizontal line after each item
+    const separator = document.createElement('hr');
+    modalCartItems.appendChild(separator);
+});
+
+    // Add the grand total at the end
+    const grandTotalElement = document.createElement('p');
+    grandTotalElement.innerHTML = `<div style="display: flex; justify-content: space-between; width: 100%;">
+    <span>Order Total</span>
+    <span style="text-align: right;"><strong>$${grandTotal.toFixed(2)}</strong></span>
+</div>`;
+    modalCartItems.appendChild(grandTotalElement);
+
+    // Show the modal
+    modal.style.display = 'block';
+}
+
+
+
+
+// Function to close the modal
+function closeModal() {
+    const modal = document.getElementById('orderModal');
+    modal.style.display = 'none';
+}
+
+// Event listener for closing the modal when clicking the close button
+document.querySelector('.close').addEventListener('click', closeModal);
+
+// Event listener for closing the modal when clicking outside of it
+window.addEventListener('click', function(event) {
+    const modal = document.getElementById('orderModal');
+    if (event.target === modal) {
+        closeModal();
+    }
+});
+
+// Event listener for starting a new order
+document.getElementById('newOrderBtn').addEventListener('click', function() {
+    // Clear the cart
+    Object.keys(cart).forEach(item => {
+        delete cart[item];
+    });
+
+    cartQuantity = 0;
+    grandTotal = 0;
+
+        // Reset all UI elements (menu items) to their initial state
+        document.querySelectorAll('.menu-item').forEach(menuItem => {
+        const itemButton = menuItem.querySelector('#btn');
+        const quantityDisplay = menuItem.querySelector('.cart-buttons');
+        const quantityElement = menuItem.querySelector('.quantity');
+
+        // Reset buttons and quantity displays
+        itemButton.style.display = 'inline-block'; // Show "Add to Cart" button
+        quantityDisplay.style.display = 'none';    // Hide quantity display
+        quantityElement.textContent = 1;           // Reset quantity text
+    });
+
+    updateCartDisplay();
+    closeModal();
+});
+
+</script>
+</body>
+</html>
